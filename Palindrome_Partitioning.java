@@ -1,12 +1,12 @@
 import java.util.*;
 
-public class Palindrome_Partitioning{
+public class Palindrome_Partitioning {
 
-	public static boolean isPalindrome(String str){
+	public static boolean isPalindrome(String str) {
 		int n = str.length();
-		for(int i=0;i<n;i++){
-			if(i<n/2){
-				if(str.charAt(i)!=str.charAt(n-i-1)){
+		for (int i = 0; i < n; i++) {
+			if (i < n / 2) {
+				if (str.charAt(i) != str.charAt(n - i - 1)) {
 					return false;
 				}
 			}
@@ -14,34 +14,34 @@ public class Palindrome_Partitioning{
 		return true;
 	}
 
-	public static int result(int i,int n,String str,int[] dp){
-		if(i==n){
+	public static int result(int i, int n, String str, int[] dp) {
+		if (i == n) {
 			return 0;
 		}
 
-		if(dp[i]!=-1){
+		if (dp[i] != -1) {
 			return dp[i];
 		}
 
 		int take = 10000000;
-		for(int j=i;j<n;j++){
-			String sub_str = str.substring(i,j+1);
-			if(isPalindrome(sub_str)){
-				take=Math.min(1+result(j+1,n,str,dp),take);
+		for (int j = i; j < n; j++) {
+			String sub_str = str.substring(i, j + 1);
+			if (isPalindrome(sub_str)) {
+				take = Math.min(1 + result(j + 1, n, str, dp), take);
 			}
 		}
 
-		return dp[i]=take;
+		return dp[i] = take;
 	}
 
 	public static int palindromePartitioning(String str) {
-	    // Write your code here
-	    int[] dp = new int[str.length()];
-	    for(int i=0;i<str.length();i++){
-	    	dp[i]=-1;
-	    }
-		return result(0,str.length(),str,dp)-1;
-	}	
+		// Write your code here
+		int[] dp = new int[str.length()];
+		for (int i = 0; i < str.length(); i++) {
+			dp[i] = -1;
+		}
+		return result(0, str.length(), str, dp) - 1;
+	}
 
 	// public static int palindromePartitioning(String str) {
 	//     // Tabulation Method
@@ -62,7 +62,7 @@ public class Palindrome_Partitioning{
 	// 	return dp[0]-1;
 	// }
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String str = sc.nextLine();
 		System.out.println(palindromePartitioning(str));
